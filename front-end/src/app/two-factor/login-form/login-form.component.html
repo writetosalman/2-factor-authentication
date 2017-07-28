@@ -1,0 +1,28 @@
+<form id="idForm" (submit)="onSubmit(salForm.value)" [formGroup]="salForm">
+  <div class="form-border">
+    <div class="form-group">
+      <label for="idEmail">Email: </label>
+      <input type="email" class="form-control" id="idEmail" placeholder="Email address"
+             [formControl]="salForm.controls['email']">
+
+
+      <span *ngIf="!email.valid && email.touched" class="badge badge-danger">Valid email address is required</span>
+    </div>
+
+    <div class="form-group">
+      <label for="idPassword">Password: </label>
+      <input type="password" class="form-control" id="idPassword"
+             [formControl]="salForm.controls['password']">
+
+      <span *ngIf="password.hasError('required') && password.touched" class="badge badge-danger">Password is required</span>
+    </div>
+
+    <div class="form-group">
+      <div *ngIf="successMsg" class="alert alert-success" [innerHTML]="this.successMsg"></div>
+      <div *ngIf="errorMsg" class="alert alert-danger" [innerHTML]="this.errorMsg"></div>
+
+      <button class="btn btn-primary"> Login </button>
+      <img *ngIf="loading" src="assets/images/loading.gif" width="65" height="65">
+    </div>
+  </div>
+</form>
