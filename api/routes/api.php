@@ -16,27 +16,3 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-/*
-|--------------------------------------------------------------------------
-| Pet Routes
-|--------------------------------------------------------------------------
-|
-| Here we define our Pet Model routes
-|
-*/
-
-/*
-
-Route::get('/', function() {
-    return redirect('/api/pets');
-});
-
-Route::get('pets',			'PetController@index');
-Route::get('pet/{pet}',		'PetController@show');
-Route::post('pet',			'PetController@store');
-Route::put('pet/{pet}',		'PetController@update');
-Route::delete('pet/{pet}',	'PetController@delete');
-
-*/
