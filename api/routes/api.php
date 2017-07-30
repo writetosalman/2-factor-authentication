@@ -20,12 +20,6 @@ Route::post('login',        'API\UserController@login');
 Route::post('register',     'API\UserController@register');
 Route::post('token',        'API\TwoFactorController@validateTokenForm');
 
-/*
-// WEB Login
-Route::post('login',        'Auth\LoginController@login');
-Route::post('register',     'Auth\RegisterController@register');
-Route::post('auth/token',   'Auth\TwoFactorController@validateTokenForm');
-*/
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
