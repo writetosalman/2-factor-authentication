@@ -75,14 +75,6 @@ export class LoginFormComponent implements OnInit {
         formData.append('email',      frm.email);
         formData.append('password',   frm.password);
 
-        // @todo Salman
-        // Once we have real api running we will remove it
-        setTimeout (() => {
-            this._router.navigate(['login']);
-        }, 400);
-
-        return;
-/*
         // Call the service for login
         this._loginService.login(formData).subscribe(
             (success: any) => {                           // success json, if returned with http response status 200
@@ -106,6 +98,5 @@ export class LoginFormComponent implements OnInit {
                 this.loading    = false;
             }
         );
-*/
     }
 }

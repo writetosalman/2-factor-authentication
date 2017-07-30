@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Srmklive\Authy\Auth\TwoFactor\Authenticatable as TwoFactorAuthenticatable;
@@ -10,6 +11,7 @@ use Srmklive\Authy\Contracts\Auth\TwoFactor\Authenticatable as TwoFactorAuthenti
 class User extends Authenticatable implements TwoFactorAuthenticatableContract
 {
     use Notifiable, TwoFactorAuthenticatable;
+	use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.

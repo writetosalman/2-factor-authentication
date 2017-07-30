@@ -13,7 +13,9 @@ In order for the 2 Factor Authentication to work, we need to perform following s
 - Start with this library [Laravel 5.4 GIT by Raza Mehdi](https://github.com/srmklive/laravel-2fa-demo)
 ( _He also has steps in this [tutorial](https://github.com/srmklive/laravel-twofactor-authentication/)_ )
 
-- Add CORRS for JSON. 
+- After that added passport to JSON using this [link](https://laravel.com/docs/5.4/passport)
+
+- Add CORRS for API if needed. 
 
 ----------------
 

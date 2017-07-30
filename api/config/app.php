@@ -180,6 +180,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Srmklive\Authy\Providers\AuthyServiceProvider::class,
         Srmklive\FlashAlert\FlashAlertServiceProvider::class,
+	    Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*
