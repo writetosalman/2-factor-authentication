@@ -177,8 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Srmklive\Authy\Providers\AuthyServiceProvider::class,
+	    Barryvdh\Cors\ServiceProvider::class,
+	    Srmklive\Authy\Providers\AuthyServiceProvider::class,
         Srmklive\FlashAlert\FlashAlertServiceProvider::class,
 	    Laravel\Passport\PassportServiceProvider::class,
     ],

@@ -10,9 +10,6 @@ class AfterMiddleware
 	{
 		$response = $next($request);
 
-		// Perform action
-		$response->header('Access-Control-Allow-Origin', '*');
-
 		return $response;
 	}
 }

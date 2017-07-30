@@ -14,20 +14,33 @@ class UserController extends Controller
 	public $successStatus = 200;
 
 	/**
-	 * login api
+	 * Handle a login request to the application.
 	 *
-	 * @return \Illuminate\Http\Response
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return string
+	 *
 	 */
-	public function login() {
+	public function login(Request  $request) {
 
 		if ( Auth::attempt(['email' => request('email'), 'password' => request('password')]) ) {
 			$user               = Auth::user();
 			$success['token']   =  $user->createToken('MyApp')->accessToken;
 
-			return response()->json(['success' => $success], $this->successStatus);
+			if ( authy()->isEnabled($user) ) {
+				return response()->json([
+											'is2FactorEnabled'  => 'true',
+											'auth_id'           => $user->id,
+											//'two_factor_id'   => $user->two_factor_options->id,
+											'success'           => $user
+										], $this->successStatus);
+			}
+			else {
+				// 2 Factor not needed. Just login
+				return response()->json(['success' => $success], $this->successStatus);
+			}
 		}
 		else {
-			return response()->json(['error'=>'Unauthorised'], 401);
+			return response()->json(['error'=>'Email &amp; password combination dont match.'], 401);
 		}
 	}
 
@@ -39,21 +52,21 @@ class UserController extends Controller
 	public function register(Request $request)
 	{
 		$validator = Validator::make($request->all(), [
-			'name' => 'required',
-			'email' => 'required|email',
-			'password' => 'required',
-			'c_password' => 'required|same:password',
-		]);
+										'name'          => 'required',
+										'email'         => 'required|email',
+										'password'      => 'required',
+										'c_password'    => 'required|same:password',
+									]);
 
 		if ($validator->fails()) {
 			return response()->json(['error'=>$validator->errors()], 401);
 		}
 
 		$input = $request->all();
-		$input['password'] = bcrypt($input['password']);
-		$user = User::create($input);
-		$success['token'] =  $user->createToken('MyApp')->accessToken;
-		$success['name'] =  $user->name;
+		$input['password']  = bcrypt($input['password']);
+		$user               = User::create($input);
+		$success['token']   =  $user->createToken('MyApp')->accessToken;
+		$success['name']    =  $user->name;
 
 		return response()->json(['success'=>$success], $this->successStatus);
 	}

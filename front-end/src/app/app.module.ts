@@ -11,6 +11,7 @@ import { TwoFactorComponent }       from './two-factor/two-factor.component';
 import { LoginFormComponent }       from './two-factor/login-form/login-form.component';
 import { RegisterFormComponent }    from './two-factor/register-form/register-form.component';
 import { LoginComponent } from './two-factor/login/login.component';
+import { HomeComponent } from './two-factor/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './two-factor/login/login.component';
     TwoFactorComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

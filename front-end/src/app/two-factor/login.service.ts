@@ -2,6 +2,7 @@ import { Injectable }               from '@angular/core';
 import { Router }                   from '@angular/router';
 import { Headers, Http }            from '@angular/http';
 
+import { User }                     from './user';
 import { Observable }               from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -24,4 +25,50 @@ export class LoginService {
         return this._http.post(this.loginUrl + 'login', frm)
             .map(response => response.json());
     }
+
+
+    public verify2Factor(frm: FormData): Observable <String> {
+
+        const usr       = this.getUser();
+        if ( usr !== null ) {
+            const userAuth  = JSON.parse(usr.two_factor_options);
+            frm.append('authy:auth:id', usr.id);
+
+            return this._http.post(this.loginUrl + 'token', frm)
+                .map(response => response.json());
+        }
+        else {
+            return;
+        }
+    }
+
+    public saveUser(usr: User) {
+
+        // Save user to login
+        localStorage.setItem("user", JSON.stringify(usr));
+    }
+
+    public removeLogin() {
+
+        // Remove from local storage
+        localStorage.removeItem("user");
+        console.log('removeLogin: ', localStorage.getItem('user'))
+
+        // Navigate to login
+        this._router.navigate(['home']);
+    }
+
+    public getUser(): User {
+        let usr = localStorage.getItem("user");
+
+        // If user is not in local storage
+        if ( usr === null ) {
+            // Navigate
+            this._router.navigate(['home']);
+            return;
+        } else {
+            return JSON.parse(usr);
+        }
+    }
+
 }

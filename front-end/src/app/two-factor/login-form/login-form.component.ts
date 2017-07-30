@@ -78,20 +78,33 @@ export class LoginFormComponent implements OnInit {
         // Call the service for login
         this._loginService.login(formData).subscribe(
             (success: any) => {                           // success json, if returned with http response status 200
-                this.user       = success as User;
-                this.successMsg = 'Username/password accepted successfully';
+                console.log(success);
+
+                if ( success.is2FactorEnabled === 'true' ) {
+                    this._loginService.saveUser(success.success as User);
+                    this._router.navigate(['verify-token', success.auth_id]);
+                }
+                else {
+                    this.successMsg = 'Username/password accepted successfully';
+                }
+
 
                 // This setTimeout is only for the demo
                 // Once we have real api running we will remove it
-                setTimeout (() => {
+                /* setTimeout (() => {
                     this._router.navigate(['login']);
-                }, 400);
+                }, 400); */
 
             },
             (error: any) => {                             // error json if returned with other http response status
-                var res = JSON.parse(error._body);
-                //console.log(res.error);
-                this.errorMsg   = res.error;
+                //console.log(error);
+                if ( error.status === 0 ) {
+                    this.errorMsg = 'Unknown error happened while connecting to api.';
+
+                } else {
+                    const res = JSON.parse(error._body);
+                    this.errorMsg   = res.error;
+                }
                 this.loading    = false;
             },
             () => {                                       // always called once completed

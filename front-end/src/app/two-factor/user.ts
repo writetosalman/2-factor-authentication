@@ -3,11 +3,14 @@
  */
 export class User {
     constructor(
-        public id:                  number,
+        public id:		            number,
         public email:               string,
         public name:                string,
-        public password:            string,
+        public phone_country_code:  string,
+        public phone_number:        string,
         public token:               string,
-        public isTwoFacDone:        boolean,
+        public two_factor_options:  string,
+        public created_at:          Date,
+        public updated_at:          Date
     ) { }
 }
