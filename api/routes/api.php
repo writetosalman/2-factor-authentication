@@ -16,8 +16,8 @@ Route::get('/', function() {
 	return redirect('/api/login');
 });
 
-Route::post('login',        'API\UserController@login');
-Route::post('register',     'API\UserController@register');
+Route::post('login',        'API\LoginController@login');
+Route::post('register',     'API\LoginController@register');
 Route::post('token',        'API\TwoFactorController@validateTokenForm');
 
 
