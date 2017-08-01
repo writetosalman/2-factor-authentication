@@ -30,6 +30,8 @@ After you have checkout the repo, you need to do following:
 - After that you can start Laravel environment using command<br>
 `php artisan serve`
 
+- If needed run tests using command `vendor/bin/phpunit`
+
 
 ### Thanks to following contributors
 
